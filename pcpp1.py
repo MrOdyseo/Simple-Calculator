@@ -7,10 +7,10 @@ def evaluate():
     entry2 = num_2.get()
 
     if not validate_input(entry1):
-        messagebox.showwarning("Math Error!", "Please enter a valid number, higher than 0")
+        messagebox.showwarning("Math Error!", "Please enter a valid number")
         num_1.focus()
     if not validate_input(entry2):
-        messagebox.showwarning("Math Error!", "Please enter a valid number, higher than 0")
+        messagebox.showwarning("Math Error!", "Please enter a valid number")
         num_2.focus()
     
     num1 = int(entry1)
@@ -21,7 +21,14 @@ def evaluate():
     elif choice == "2":
         result = num1 - num2
     elif choice == "3":
-        result = num1 / num2
+        if not int(num1) > 0:
+            messagebox.showwarning("Math Error!", "Please enter a number higher than 0")
+            num_1.focus()
+        elif not int(num2) > 0:
+            messagebox.showwarning("Math Error!", "Please enter a number higher than 0")
+            num_2.focus()            
+        else:
+            result = num1 / num2
     elif choice == "4":
         result = num1 * num2
     messagebox.showinfo("Result", f"Result = {result}")    
@@ -29,7 +36,7 @@ def evaluate():
 def validate_input(value):
     if value == "":
         return False
-    return value.isdigit() and int(value) > 0
+    return value.isdigit()
 
 calc = tk.Tk()
 calc.title("Calculator")
